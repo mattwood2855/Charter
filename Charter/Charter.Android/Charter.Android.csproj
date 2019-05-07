@@ -56,7 +56,10 @@
     <Reference Include="Mono.Android" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adapters\ObservableCollectionRecyclerViewAdapter.cs" />
+    <Compile Include="Adapters\UserRecyclerViewAdapter.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="Models\UserRecyclerViewHolder.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -99,6 +102,11 @@
       <Project>{6462e770-df41-4344-97eb-e59e8bb90dab}</Project>
       <Name>Charter</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\UserListItem.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

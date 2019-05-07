@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Charter.ViewModels
 {
@@ -25,7 +26,11 @@ namespace Charter.ViewModels
 
         public void TrySave ()
         {
-
+            foreach(var rule in Rules)
+            {
+                if (!Regex.Match(Password, rule).Success)
+                    throw new Exception(rule);
+            }
         }
     }
 }
