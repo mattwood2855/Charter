@@ -6,6 +6,10 @@ using Android.Widget;
 using Android.Support.V7.Widget;
 using Charter.ViewModels;
 using Charter.Android.Adapters;
+using Toolbar = Android.Widget.Toolbar;
+using ViewStates = Android.Views.ViewStates;
+using System.Linq;
+using Android.Views;
 
 namespace Charter.Android
 {
@@ -18,17 +22,40 @@ namespace Charter.Android
         {
             base.OnCreate(savedInstanceState);
 
-            Title = "Users";
-            SetContentView(Resource.Layout.activity_main);
+            MainViewModel = new MainViewModel();
+
+            SetContentView(Resource.Layout.Main);
+
+            SetupToolbar();
+
+            var tvEmpty = FindViewById<TextView>(Resource.Id.TvEmpty);
+            tvEmpty.Visibility = MainViewModel.Users.Any() ? ViewStates.Gone : ViewStates.Visible;
 
             // Get the recycler view
-            var list = FindViewById<RecyclerView>(Resource.Id.RvUsers);
-
+            var recyclerView = FindViewById<RecyclerView>(Resource.Id.RvUsers);
+            // Set the layout to linear
+            recyclerView.SetLayoutManager(new LinearLayoutManager(ApplicationContext));
             // Create and set the adapter
             var userAdapter = new UserRecyclerViewAdapter(ApplicationContext, MainViewModel.Users);
-            list.SetAdapter(userAdapter);
+            recyclerView.SetAdapter(userAdapter);
+        }
 
-            
+        void SetupToolbar()
+        {
+            var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
+            SetActionBar(toolbar);
+            ActionBar.Title = "Users";
+        }
+
+        //public override bool OnCreateOptionsMenu(IMenu menu)
+        //{
+        //    MenuInflater.Inflate(Resource.Menu.MainMenu, menu);
+        //    return base.OnCreateOptionsMenu(menu);
+        //}
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            return base.OnOptionsItemSelected(item);
         }
     }
 }
