@@ -9,7 +9,7 @@ namespace Charter
     {
         public static CharterApp Instance { get; } = new CharterApp();
 
-        public Storage Storage { get; }
+        public IStorage Storage { get; }
 
         CharterApp()
         {
