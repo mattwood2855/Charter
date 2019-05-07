@@ -52,6 +52,7 @@ namespace Charter.Android.Adapters
                     NotifyItemMoved(e.OldStartingIndex, e.NewStartingIndex);
                     break;
                 case System.Collections.Specialized.NotifyCollectionChangedAction.Reset:
+                    NotifyDataSetChanged();
                     break;
             }
         }

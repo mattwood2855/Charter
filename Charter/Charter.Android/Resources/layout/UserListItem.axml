@@ -9,7 +9,8 @@
 	<ImageView
         android:id="@+id/IvAvatar"
         android:layout_height="40dp"
-		android:layout_width="40dp"/>
+		android:layout_width="40dp"
+		android:layout_marginRight="8dp"/>
 	<LinearLayout
 		android:orientation="vertical"
 		android:layout_height="wrap_content"
@@ -21,14 +22,20 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:singleLine="true"
-            android:text="Usernamehsioadhgiuadhgpiaehguaerihg" />
+            android:text="John Doe" />
 		<TextView
             android:id="@+id/TvPassword"
-            android:layout_width="170dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
             android:singleLine="true"
-            android:text="Usernamehsioadhgiuadhgpiaehguaerihg"/>
+            android:text="some password"/>
 	</LinearLayout>
+	<ImageView
+		android:id="@+id/IvDelete"
+		android:layout_height="24dp"
+		android:layout_width="fill_parent"
+		android:layout_gravity="right"
+		android:src="@drawable/baseline_delete_black_48dp"/>
 </LinearLayout>

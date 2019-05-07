@@ -8,17 +8,10 @@ namespace Charter.ViewModels
 {
     public class MainViewModel
     {
-        public ObservableCollection<User> Users { get; }
+        public ObservableCollection<User> Users => CharterApp.Instance.Storage.Users;
 
         public MainViewModel()
-        {
-            Users = new ObservableCollection<User>();
-
-            Users.Add(new User("Jimi Page", "123456"));
-            Users.Add(new User("Bob Dylan", "123456"));
-            Users.Add(new User("Alicia Keys", "123456"));
-            Users.Add(new User("Bob Parker", "123456"));
-            Users.Add(new User("Whitney Houston", "123456"));
+        {            
         }
     }
 }

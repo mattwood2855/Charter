@@ -29,10 +29,16 @@ namespace Charter.Android.Adapters
             userViewHolder.Username.Text = user.Username;
             // Set the password
             userViewHolder.Password.Text = user.Password;
+
+            userViewHolder.DeleteIcon.Click += (s, e) =>
+            {
+                CharterApp.Instance.Storage.DeleteUser(user);
+            };
         }
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
         {
+            // Create the user list item view holder
             var viewHolder = inflater.Inflate(Resource.Layout.UserListItem, parent, false);
             return new UserRecyclerViewHolder(viewHolder);
         }

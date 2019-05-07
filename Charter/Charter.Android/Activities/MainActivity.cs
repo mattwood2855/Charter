@@ -11,7 +11,7 @@ using ViewStates = Android.Views.ViewStates;
 using System.Linq;
 using Android.Views;
 
-namespace Charter.Android
+namespace Charter.Android.Activities
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
     public class MainActivity : AppCompatActivity
@@ -45,17 +45,13 @@ namespace Charter.Android
             var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
             SetActionBar(toolbar);
             ActionBar.Title = "Users";
-        }
 
-        //public override bool OnCreateOptionsMenu(IMenu menu)
-        //{
-        //    MenuInflater.Inflate(Resource.Menu.MainMenu, menu);
-        //    return base.OnCreateOptionsMenu(menu);
-        //}
-
-        public override bool OnOptionsItemSelected(IMenuItem item)
-        {
-            return base.OnOptionsItemSelected(item);
+            var add = FindViewById<ImageView>(Resource.Id.IvAdd);
+            add.Click += (s, e) => 
+            {
+                StartActivity(typeof(AddUserActivity));
+            };
         }
     }
 }
+

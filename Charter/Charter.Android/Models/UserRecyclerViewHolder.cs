@@ -16,6 +16,7 @@ namespace Charter.Android.Models
     public class UserRecyclerViewHolder : RecyclerView.ViewHolder
     {
         public ImageView Avatar { get; private set; }
+        public ImageView DeleteIcon { get; private set; }
         public TextView Password { get; private set; }
         public TextView Username { get; private set; }
 
@@ -23,10 +24,9 @@ namespace Charter.Android.Models
             : base(itemView)
         {
             Avatar = itemView.FindViewById<ImageView>(Resource.Id.IvAvatar);
+            DeleteIcon = itemView.FindViewById<ImageView>(Resource.Id.IvDelete);
             Password = itemView.FindViewById<TextView>(Resource.Id.TvPassword);
             Username = itemView.FindViewById<TextView>(Resource.Id.TvUsername);
-
-            //itemView.Click += (sender, e) => listener(base.LayoutPosition);
         }
     }
 }
