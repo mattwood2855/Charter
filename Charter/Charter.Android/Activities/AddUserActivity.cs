@@ -1,22 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 
 using Android.App;
-using Android.Content;
 using Android.Graphics;
 using Android.Media;
 using Android.OS;
-using Android.Runtime;
 using Android.Support.Design.Widget;
-using Android.Views;
 using Android.Widget;
 using Charter.Android.Extensions;
 using Charter.Models;
 using Charter.ViewModels;
-using Java.IO;
 using Refractored.Controls;
 using ImeAction = Android.Views.InputMethods.ImeAction;
 
