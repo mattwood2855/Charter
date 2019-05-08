@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 
@@ -25,13 +26,21 @@ namespace Charter.Models
         /// </summary>
         /// <param name="user">The user to delete.</param>
         void DeleteUser(User user);
+
+        /// <summary>
+        /// Save the avatar as a local file.
+        /// </summary>
+        /// <param name="fileName">The name.</param>
+        /// <param name="data">The image file.</param>
+        void SaveAvatar(string fileName, byte[] data);
     }
 
     public class Storage : IStorage
     {
         public ObservableCollection<User> Users { get; private set; }
 
-        public string StoragePath => Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+        public string AvatarFile(string userId) => Path.Combine(StoragePath, userId + ".avatar");
+        public string StoragePath => Xamarin.Essentials.FileSystem.AppDataDirectory;
         public string UserFile => Path.Combine(StoragePath, "users.txt");
 
         public Storage()
@@ -75,6 +84,28 @@ namespace Charter.Models
                 // Deserialize the data
                 var users = JsonConvert.DeserializeObject<IEnumerable<User>>(userText);
 
+                // If there are users
+                if (users != null)
+                {
+                    // Go through each user
+                    foreach (var user in users)
+                    {
+                        // Get the theoretical path to the avatar
+                        var imagePath = AvatarFile(user.Id);
+
+                        // If we stored an avatar for them
+                        try
+                        {
+                            //Load it
+                            user.Image = File.ReadAllBytes(imagePath);
+                        }
+                        catch
+                        {
+                            Debug.WriteLine($"Could not find user avatar: {imagePath}");
+                        }
+                    }
+                }
+
                 // Initialize the collection
                 Users = new ObservableCollection<User>(users ?? new List<User>());
             }
@@ -85,6 +116,24 @@ namespace Charter.Models
 
                 // Initialize the collection
                 Users = new ObservableCollection<User>();
+            }
+        }
+
+        /// <summary>
+        /// Save the avatar as a local file.
+        /// </summary>
+        /// <param name="fileName">The name.</param>
+        /// <param name="data">The image file.</param>
+        public void SaveAvatar(string userId, byte[] data)
+        {
+            try
+            {
+                File.WriteAllBytes(AvatarFile(userId), data);
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine("Could not save avatar.");
+                Debug.WriteLine(ex);
             }
         }
 

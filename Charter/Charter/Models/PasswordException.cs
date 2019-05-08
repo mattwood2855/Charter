@@ -4,11 +4,11 @@ using System.Text;
 
 namespace Charter.Models
 {
-    public class PasswordException : Exception
+    public class ValidationException : Exception
     {
         public IEnumerable<string> Violations { get; }
 
-        public PasswordException(IEnumerable<string> violations)
+        public ValidationException(IEnumerable<string> violations)
         {
             Violations = violations;
         }

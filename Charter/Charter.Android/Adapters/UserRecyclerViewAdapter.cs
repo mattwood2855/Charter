@@ -2,7 +2,9 @@
 using Android.Content;
 using Android.Support.V7.Widget;
 using Android.Views;
+using Charter.Android.Extensions;
 using Charter.Android.Models;
+using Charter.Extensions;
 using Charter.Models;
 
 namespace Charter.Android.Adapters
@@ -24,11 +26,16 @@ namespace Charter.Android.Adapters
             if(!(holder is UserRecyclerViewHolder userViewHolder)) return;
 
             // Set the avatar
-            userViewHolder.Avatar.SetImageResource(Resource.Drawable.baseline_person_black_48dp);
+            if (user.Image != null)
+                userViewHolder.Avatar.SetImageBitmap(user.Image.ToBitmap());
+            else
+                userViewHolder.Avatar.SetImageResource(Resource.Drawable.baseline_person_black_48dp);
+
             // Set the username
             userViewHolder.Username.Text = user.Username;
+
             // Set the password
-            userViewHolder.Password.Text = user.Password;
+            userViewHolder.Phone.Text = user.Phone.FormatPhoneNumber();
 
             userViewHolder.DeleteIcon.Click += (s, e) =>
             {
